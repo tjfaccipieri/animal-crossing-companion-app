@@ -62,7 +62,7 @@ docker-compose up --build
 - O banco de dados PostgreSQL estará disponível na porta 5432 dentro do container, e na porta 5433 externamente.
 
 4. **Proximos Passos**
-1. Após finalizar as integrações e desenvolvimento necessário do projeto, pretendo fazer o deploy do mesmo em alguma plataforma online, com autenticação de usuário, para que cada pessoa possa acessar atravez de uma URL e ter seu próprio sistema de controle. Enquanto isso, vai rodando local mesmo que da pra brincar um pouco
+ Após finalizar as integrações e desenvolvimento necessário do projeto, pretendo fazer o deploy do mesmo em alguma plataforma online, com autenticação de usuário, para que cada pessoa possa acessar atravez de uma URL e ter seu próprio sistema de controle. Enquanto isso, vai rodando local mesmo que da pra brincar um pouco
 
 5. **Contribuições**
    Estamos abertos a sugestões e melhorias! Se você tiver ideias ou ajustes para este projeto, sinta-se à vontade para contribuir:
