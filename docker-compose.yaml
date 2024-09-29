@@ -12,4 +12,11 @@ services:
       context: ./backend
     ports:
       - "8080:8080"
-    
+    depends_on:
+      - database
+
+  database:
+    build: 
+      context: ./database
+    ports:
+      - "5433:5432"
