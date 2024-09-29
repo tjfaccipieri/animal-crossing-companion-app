@@ -1,4 +1,4 @@
-import { TurnipPerDay } from '../components/ui/turnip-per-day';
+import construction from '/gyroid.webp';
 
 export function Home() {
   return (
@@ -6,7 +6,7 @@ export function Home() {
       <h1 className="font-bold text-center text-4xl text-amber-950 font-custom tracking-wide">
         Animal Crossing New Horizons - Companion APP
       </h1>
-      <div className="grid grid-cols-3">
+      {/* <div className="grid grid-cols-3">
         <div className="flex flex-col gap-2 px-3 py-2 border-2 rounded-lg bg-amber-400 w-fit border-amber-950 h-fit">
           <h2 className="font-mono text-xl font-bold text-center text-amber-950">
             Turnip Price
@@ -30,6 +30,14 @@ export function Home() {
         <div className='col-span-2'>
 
         </div>
+      </div> */}
+      <div className='flex flex-col items-center gap-8 mt-8'>
+        <p className="font-bold text-center text-2xl text-amber-950">
+          This page is under construction and awaiting donations from our
+          residents. Please use the navbar so our Dodos can take you somewhere
+          more useful.
+        </p>
+        <img src={construction} alt="" />
       </div>
     </div>
   );

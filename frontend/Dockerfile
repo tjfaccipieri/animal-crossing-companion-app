@@ -24,6 +24,9 @@ RUN npm run build
 # Usando o nginx na versão alpine dele
 FROM nginx:alpine
 
+# Copiar o arquivo de configuração do Nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Copiar os arquivos de build gerados para o diretório padrão do Nginx (a pasta dist pode mudar dependendo da aplicação)
 COPY --from=build /app/dist /usr/share/nginx/html
 
