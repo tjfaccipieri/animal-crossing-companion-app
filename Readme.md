@@ -4,13 +4,11 @@
 
 Este projeto é uma aplicação fullstack desenvolvida para o controle interno dos entregáveis do jogo **Animal Crossing**, da Nintendo. O sistema permite que os usuários gerenciem doações para o museu do jogo, facilitando a organização e acompanhamento dos itens coletados. A aplicação é composta por um backend em Java com Spring Boot e um frontend em React, ambos dockerizados para facilitar o desenvolvimento e a implantação.
 
-```
-  Este projeto ainda está em etapa de desenvolvimento, 
+>Este projeto ainda está em etapa de desenvolvimento, 
 e toda vez que for rodado um novo build do docker-compose, 
 o banco de dados voltara para sua condição inicial, 
 **não utilize como sua única forma de controle de doações**, 
 pois os dados podem ser perdidos na atualização do projeto.
-```
 
 ### Tecnologias Utilizadas
 
