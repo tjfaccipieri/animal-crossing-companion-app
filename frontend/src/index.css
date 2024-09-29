@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navbar_item {
+  @apply hover:underline flex items-center gap-1 font-bold;
+}
+
+.card_attributes_line {
+  @apply flex gap-1 text-center;
+}
+
+.card_attributes_title {
+  @apply bg-amber-200 text-amber-950 border-2 border-amber-950 font-bold px-2 py-1 rounded min-w-20 flex justify-center text-sm;
+}
+
+.card_attributes_content {
+  @apply bg-amber-950 px-4 py-1 rounded text-sm w-full h-full;
+  @apply flex items-center;
+  @apply overflow-hidden;
+}
+
+.card_attributes_content span {
+  @apply block w-full overflow-hidden text-ellipsis whitespace-nowrap;
+}
+
+/* remove arrows from input number */
+@layer base {
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+

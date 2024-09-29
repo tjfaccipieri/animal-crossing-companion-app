@@ -1,0 +1,30 @@
+export interface Art {
+  id: string
+  name: string
+  image: string
+  hiResTexture: string
+  genuine: string
+  category: string
+  buyPrice: number
+  sellPrice: number
+  color1: string
+  color2: string
+  size: string
+  realArtworkTitle: string
+  artist: string
+  description: string
+  source: string
+  sourceNotes: string
+  hhaBasePoints: number
+  hhaConcept1: string
+  hhaConcept2: string
+  hhaSeries: string
+  hhaSet: string
+  interact: string
+  tag: string
+  speakerType: string
+  lightingType: string
+  catalog: string
+  unlocked: string
+  donated: boolean
+}
