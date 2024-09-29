@@ -48,6 +48,7 @@ pois os dados podem ser perdidos na atualização do projeto.
    ```
 
 2. **Docker Compose**:
+
    Certifique-se de ter o Docker e o Docker Compose instalados.
    Execute o seguinte comando para iniciar todos os serviços:
 
@@ -55,38 +56,40 @@ pois os dados podem ser perdidos na atualização do projeto.
 docker-compose up --build
 ```
 
-3. **Acessando a Aplicação**
+3. **Acessando a Aplicação**:
 
 - O frontend estará disponível em http://localhost:80.
 - As APIs do backend estarão disponíveis em http://localhost:8080.
 - O banco de dados PostgreSQL estará disponível na porta 5432 dentro do container, e na porta 5433 externamente.
 
-4. **Proximos Passos**
+4. **Proximos Passos**:
+
  Após finalizar as integrações e desenvolvimento necessário do projeto, pretendo fazer o deploy do mesmo em alguma plataforma online, com autenticação de usuário, para que cada pessoa possa acessar atravez de uma URL e ter seu próprio sistema de controle. Enquanto isso, vai rodando local mesmo que da pra brincar um pouco
 
-5. **Contribuições**
+5. **Contribuições**:
+
    Estamos abertos a sugestões e melhorias! Se você tiver ideias ou ajustes para este projeto, sinta-se à vontade para contribuir:
 
-- Fork o Repositório: Crie um fork deste repositório.
-  Crie uma Branch: Crie uma branch para suas alterações.
+Crie um fork deste repositório.
+Crie uma Branch: Crie uma branch para suas alterações.
 
 ```bash
 git checkout -b minha-feature
 ```
 
-Commit suas Alterações: Faça commit das suas alterações.
+Faça commit das suas alterações.
 
 ```bash
 git commit -m "Adiciona nova funcionalidade"
 ```
 
-Envie para o Repositório Remoto: Envie suas alterações para o GitHub.
+Envie suas alterações para o GitHub.
 
 ```bash
 git push origin minha-feature
 ```
 
-Abra um Pull Request: No GitHub, abra um pull request descrevendo suas alterações.
+No GitHub, abra um pull request descrevendo suas alterações.
 
 ## Agradecimentos
 
