@@ -1,7 +1,7 @@
 # Estágio de build
 FROM openjdk:21-jdk as build
 
-# Instalar dockerize para aguardar o banco de dados estar pronto
+# # Instalar dockerize para aguardar o banco de dados estar pronto
 ADD https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz /tmp/
 RUN tar -C /usr/local/bin -xzvf /tmp/dockerize-linux-amd64-v0.6.1.tar.gz
 
