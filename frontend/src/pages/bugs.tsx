@@ -16,6 +16,7 @@ export function BugsPage() {
       return data;
     },
     staleTime: 1000 * 60 * 60 * 24, // 1 dia completo, em milissegundos
+
   });
 
   const [orderBy, setOrderBy] = useState<string>('asc');
