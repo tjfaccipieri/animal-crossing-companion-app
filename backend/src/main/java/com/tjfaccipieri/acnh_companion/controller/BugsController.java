@@ -26,7 +26,7 @@ public class BugsController {
   @PatchMapping("/donate")
   public ResponseEntity<Void> updateDonate(@RequestBody Bugs bugs){
     Bugs bug = repository.findById(bugs.getId()).orElseThrow(() -> new EntityNotFoundException("Bug not found"));
-    bug.setDonated(bugs.getDonated());
+    //bug.setDonated(bugs.getDonated());
     repository.save(bug);
     return ResponseEntity.ok().build();
   }

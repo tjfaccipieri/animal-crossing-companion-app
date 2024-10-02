@@ -1,13 +1,14 @@
 package com.tjfaccipieri.acnh_companion.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_bugs")
@@ -19,7 +20,7 @@ public class Bugs {
   private String id;
   private int critterpediaOrder;
   private String name;
-  private Boolean donated;
+  //private Boolean donated;
   private String catchPhrase;
   private String color1;
   private String color2;
@@ -62,4 +63,16 @@ public class Bugs {
   private Long totalCatchesToUnlock;
   private String weather;
   private String whereHow;
+  
+  @ManyToMany(mappedBy = "donatedBugs")
+  @JsonIgnoreProperties("donatedBugs")
+  private Set<User> donatedByUsers = new HashSet<>();
+  
+  public boolean isDonatedBy(User user) {
+    return donatedByUsers.contains(user);
+  }
+  
+  public int getTotalDonations() {
+    return donatedByUsers.size();
+  }
 }

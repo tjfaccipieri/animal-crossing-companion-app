@@ -1,7 +1,8 @@
 services:
   frontend:
-    build: 
-      context: ./frontend
+    # build: 
+    #   context: ./frontend
+    image: tjfaccipieri/acnh-companion-frontend:latest
     ports:
       - "80:80"
     depends_on:
