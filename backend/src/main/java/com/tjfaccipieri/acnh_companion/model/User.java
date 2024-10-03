@@ -51,6 +51,24 @@ public class User {
   )
   @JsonIgnoreProperties("donatedByUsers")
   private Set<SeaCreatures> donatedSeaCreatures = new HashSet<>();
+
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(
+          name = "user_donated_fossils",
+          joinColumns = @JoinColumn(name = "user_id"),
+          inverseJoinColumns = @JoinColumn(name = "fossil_id")
+  )
+  @JsonIgnoreProperties("donatedByUsers")
+  private Set<Fossils> donatedFossils = new HashSet<>();
+
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(
+          name = "user_donated_arts",
+          joinColumns = @JoinColumn(name = "user_id"),
+          inverseJoinColumns = @JoinColumn(name = "art_id")
+  )
+  @JsonIgnoreProperties("donatedByUsers")
+  private Set<Arts> donatedArts = new HashSet<>();
   
   public void donateBug(Bugs bug) {
     donatedBugs.add(bug);
@@ -79,7 +97,7 @@ public class User {
     return donatedFishes.size();
   }
   
-  public void donateSeaCreatures(SeaCreatures seaCreatures) {
+  public void donateSeaCreature(SeaCreatures seaCreatures) {
     donatedSeaCreatures.add(seaCreatures);
   }
   public void undoDonateSeaCreatures(SeaCreatures seaCreatures) {
@@ -91,6 +109,30 @@ public class User {
   public int getTotalDonatedSeaCreatures() {
     return donatedSeaCreatures.size();
   }
-  
-  
+
+  public void donateFossil(Fossils fossil) {
+    donatedFossils.add(fossil);
+  }
+  public void undoDonateFossil(Fossils fossil) {
+    donatedFossils.remove(fossil);
+  }
+  public boolean hasDonatedFossil(Fossils fossil) {
+    return donatedFossils.contains(fossil);
+  }
+  public int getTotalDonatedFossil() {
+    return donatedFossils.size();
+  }
+
+  public void donateArt(Arts art) {
+    donatedArts.add(art);
+  }
+  public void undoDonateArt(Arts art) {
+    donatedArts.remove(art);
+  }
+  public boolean hasDonatedArt(Arts art) {
+    return donatedArts.contains(art);
+  }
+  public int getTotalDonatedArt() {
+    return donatedArts.size();
+  }
 }

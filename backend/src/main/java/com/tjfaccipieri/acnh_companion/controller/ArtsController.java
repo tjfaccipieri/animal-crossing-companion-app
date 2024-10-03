@@ -25,7 +25,7 @@ public class ArtsController {
   @PatchMapping("/donate")
   public ResponseEntity<Void> updateDonate(@RequestBody Arts arts){
     Arts art = repository.findById(arts.getId()).orElseThrow(() -> new EntityNotFoundException("Bug not found"));
-    art.setDonated(arts.getDonated());
+
     repository.save(art);
     return ResponseEntity.ok().build();
   }
