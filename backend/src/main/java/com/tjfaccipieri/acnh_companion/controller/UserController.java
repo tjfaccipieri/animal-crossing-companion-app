@@ -1,9 +1,11 @@
 package com.tjfaccipieri.acnh_companion.controller;
 
 import com.tjfaccipieri.acnh_companion.model.Bugs;
+import com.tjfaccipieri.acnh_companion.model.DTO.UserDonation;
 import com.tjfaccipieri.acnh_companion.model.User;
 import com.tjfaccipieri.acnh_companion.repository.BugsRepository;
 import com.tjfaccipieri.acnh_companion.repository.UserRepository;
+import com.tjfaccipieri.acnh_companion.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,9 @@ public class UserController {
   
   @Autowired
   private UserRepository userRepository;
+  
+  @Autowired
+  private UsersService usersService;
   
   @Autowired
   private BugsRepository bugsRepository;
@@ -36,19 +41,9 @@ public class UserController {
     return ResponseEntity.ok(userRepository.findAll());
   }
   
-  @PostMapping("/{userId}/donate/{bugId}")
-  public ResponseEntity<?> donateBug(@PathVariable Long userId, @PathVariable String bugId) {
-    User user = userRepository.findById(userId).orElse(null);
-    Bugs bug = bugsRepository.findById(bugId).orElse(null);
-    
-    if(user == null || bug == null) {
-      return ResponseEntity.notFound().build();
-    }
-    
-    user.donateBug(bug);
-    userRepository.save(user);
-    
-    return ResponseEntity.ok().body("Bug donated successfully");
+  @PostMapping("/donate")
+  public ResponseEntity<?> donate(@RequestBody UserDonation donation) {
+    return usersService.donation(donation);
   }
   
   @GetMapping("/{userId}/donated")

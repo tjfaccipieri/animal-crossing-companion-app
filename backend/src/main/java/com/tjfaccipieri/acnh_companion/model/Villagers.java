@@ -14,20 +14,20 @@ public class Villagers {
   @Id
   private String id;
   private String name;
-  private String iconImage;
-  private String photoImage;
+  private String icon_image;
+  private String photo_image;
   private String species;
   private String gender;
   private String personality;
   private String hobby;
   private String birthday;
   private String catchphrase;
-  private String favoriteSong;
-  private String favoriteSaying;
+  private String favorite_song;
+  private String favorite_saying;
   private String style1;
   private String style2;
   private String color1;
   private String color2;
-  private String nameColor;
-  private String bubbleColor;
+  private String name_color;
+  private String bubble_color;
 }

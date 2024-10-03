@@ -17,10 +17,10 @@ public class Fossils {
   private Boolean donated;
   private String name;
   private String image;
-  private Long sellPrice;
-  private String fossilGroup;
+  private Long sell_price;
+  private String fossil_group;
   private String description;
-  private Long hhaBasePoints;
+  private Long hha_base_points;
   private String color1;
   private String color2;
   private String size;

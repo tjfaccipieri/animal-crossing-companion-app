@@ -11,6 +11,7 @@ import { SeaCreaturesPage } from './pages/sea-creatures';
 import { Villagers } from './pages/villagers';
 
 export function App() {
+
   return (
     <BrowserRouter>
       <div className="grid grid-rows-[auto_1fr_auto] min-h-screen">
