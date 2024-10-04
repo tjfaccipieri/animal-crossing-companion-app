@@ -85,7 +85,6 @@ public class UsersService {
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
-  // Terminar de fazer essa porcaria
   public ResponseEntity<Object> undoDonation(UserDonation donation) {
     User user = userRepository.findById(donation.getUserId()).orElse(null);
 

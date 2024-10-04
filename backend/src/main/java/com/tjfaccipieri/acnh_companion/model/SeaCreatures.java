@@ -21,6 +21,7 @@ import java.util.Set;
 public class SeaCreatures {
   @Id
   private String id;
+
   private String name;
   private Boolean donated;
   private String icon_image;

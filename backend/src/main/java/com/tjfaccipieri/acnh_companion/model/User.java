@@ -27,12 +27,16 @@ public class User {
   private String password;
   
   private String email;
+
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "island_id", referencedColumnName = "id")
+  private Island island;
   
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
       name = "user_donated_bugs",
-      joinColumns = @JoinColumn(name = "user_id"),
-      inverseJoinColumns = @JoinColumn(name = "bug_id")
+      joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+      inverseJoinColumns = @JoinColumn(name = "bug_id", referencedColumnName = "id")
   )
   @JsonIgnore
   private Set<Bugs> donatedBugs = new HashSet<>();
@@ -40,8 +44,8 @@ public class User {
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
       name = "user_donated_fishes",
-      joinColumns = @JoinColumn(name = "user_id"),
-      inverseJoinColumns = @JoinColumn(name = "fish_id")
+      joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+      inverseJoinColumns = @JoinColumn(name = "fish_id", referencedColumnName = "id")
   )
   @JsonIgnore
   private Set<Fishes> donatedFishes = new HashSet<>();
@@ -49,8 +53,8 @@ public class User {
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
       name = "user_donated_sea_creatures",
-      joinColumns = @JoinColumn(name = "user_id"),
-      inverseJoinColumns = @JoinColumn(name = "sea_creature_id")
+      joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+      inverseJoinColumns = @JoinColumn(name = "sea_creature_id", referencedColumnName = "id")
   )
   @JsonIgnore
   private Set<SeaCreatures> donatedSeaCreatures = new HashSet<>();
@@ -58,8 +62,8 @@ public class User {
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
           name = "user_donated_fossils",
-          joinColumns = @JoinColumn(name = "user_id"),
-          inverseJoinColumns = @JoinColumn(name = "fossil_id")
+          joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+          inverseJoinColumns = @JoinColumn(name = "fossil_id", referencedColumnName = "id")
   )
   @JsonIgnore
   private Set<Fossils> donatedFossils = new HashSet<>();
@@ -67,8 +71,8 @@ public class User {
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
           name = "user_donated_arts",
-          joinColumns = @JoinColumn(name = "user_id"),
-          inverseJoinColumns = @JoinColumn(name = "art_id")
+          joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+          inverseJoinColumns = @JoinColumn(name = "art_id", referencedColumnName = "id")
   )
   @JsonIgnore
   private Set<Arts> donatedArts = new HashSet<>();
