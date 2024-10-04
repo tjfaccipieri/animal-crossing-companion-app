@@ -2,8 +2,10 @@ package com.tjfaccipieri.acnh_companion.service;
 
 import com.tjfaccipieri.acnh_companion.model.*;
 import com.tjfaccipieri.acnh_companion.model.DTO.UserDonation;
+import com.tjfaccipieri.acnh_companion.model.DTO.UserResponseBasic;
 import com.tjfaccipieri.acnh_companion.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,7 @@ public class UsersService {
     User user = userRepository.findById(donation.getUserId()).orElse(null);
     
     if (user == null) {
-      return ResponseEntity.notFound().build();
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
     
     switch (donation.getDonateType()) {
@@ -41,11 +43,12 @@ public class UsersService {
         Fishes fish = fishesRepository.findById(donation.getDonateId()).orElse(null);
         
         if (fish == null) {
-          return ResponseEntity.notFound().build();
+          return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         
         user.donateFish(fish);
         userRepository.save(user);
+        
       }
       case "seaCreature": {
         SeaCreatures seaCreature = seaCreaturesRepository.findById(donation.getDonateId()).orElse(null);
@@ -71,7 +74,7 @@ public class UsersService {
         Arts art = artsRepository.findById(donation.getDonateId()).orElse(null);
 
         if (art == null) {
-          return ResponseEntity.notFound().build();
+          return ResponseEntity.badRequest().build();
         }
 
         user.donateArt(art);
@@ -79,17 +82,92 @@ public class UsersService {
       }
     }
     
-    return ResponseEntity.ok().body("Donated successfully!");
+    return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
+  // Terminar de fazer essa porcaria
   public ResponseEntity<Object> undoDonation(UserDonation donation) {
     User user = userRepository.findById(donation.getUserId()).orElse(null);
 
     if (user == null) {
       return ResponseEntity.notFound().build();
     }
-
-    return ResponseEntity.ok().body("Remove donation successfully!");
+    
+    switch (donation.getDonateType()) {
+      case "bug":{
+        Bugs bug = bugRepository.findById(donation.getDonateId()).orElse(null);
+        
+        if(bug == null) {
+          return ResponseEntity.notFound().build();
+        }
+        
+        user.undoDonateBug(bug);
+        userRepository.save(user);
+      }
+      case "fish" : {
+        Fishes fish = fishesRepository.findById(donation.getDonateId()).orElse(null);
+        
+        if (fish == null) {
+          return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        
+        user.undoDonateFish(fish);
+        userRepository.save(user);
+        
+      }
+      case "seaCreature": {
+        SeaCreatures seaCreature = seaCreaturesRepository.findById(donation.getDonateId()).orElse(null);
+        
+        if (seaCreature == null) {
+          return ResponseEntity.notFound().build();
+        }
+        
+        user.undoDonateSeaCreatures(seaCreature);
+        userRepository.save(user);
+      }
+      case "fossil": {
+        Fossils fossil = fossilsRepository.findById(donation.getDonateId()).orElse(null);
+        
+        if (fossil == null) {
+          return ResponseEntity.notFound().build();
+        }
+        
+        user.undoDonateFossil(fossil);
+        userRepository.save(user);
+      }
+      case "art":  {
+        Arts art = artsRepository.findById(donation.getDonateId()).orElse(null);
+        
+        if (art == null) {
+          return ResponseEntity.badRequest().build();
+        }
+        
+        user.undoDonateArt(art);
+        userRepository.save(user);
+      }
+    }
+    
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+  }
+  
+  public ResponseEntity<UserResponseBasic> getUserBasics(Long userId) {
+    User user = userRepository.findById(userId).orElse(null);
+    UserResponseBasic userBasic = new UserResponseBasic();
+    
+    if (user == null) {
+      return ResponseEntity.notFound().build();
+    }
+    
+    userBasic.setId(user.getId());
+    userBasic.setUsername(user.getUsername());
+    userBasic.setEmail(user.getEmail());
+    userBasic.setTotalDonatedBugs(user.getTotalDonatedBugs());
+    userBasic.setTotalDonatedFishes(user.getTotalDonatedFishes());
+    userBasic.setTotalDonatedSeaCreatures(user.getTotalDonatedSeaCreatures());
+    userBasic.setTotalDonatedFossil(user.getTotalDonatedFossil());
+    userBasic.setTotalDonatedArt(user.getTotalDonatedArt());
+    
+    return ResponseEntity.ok(userBasic);
   }
   
 }

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { type ChangeEvent, useMemo, useState } from 'react';
+import { type ChangeEvent, useContext, useMemo, useState } from 'react';
 import type { Art } from '../models/Art';
 
 import { ArtCard } from '../components/arts/art-card';
@@ -7,6 +7,7 @@ import { EmptyList } from '../components/ui/empty-list';
 import { LoadingScreen } from '../components/ui/loading-screen';
 import { ProgressDonate } from '../components/ui/progress-donate';
 import { SelectFilter } from '../components/ui/select-filter';
+import { UserContext } from '../context/UserContext';
 
 export function ArtsPage() {
   const { data, isLoading } = useQuery<Art[]>({
@@ -19,15 +20,12 @@ export function ArtsPage() {
     staleTime: 1000 * 60 * 60 * 24, // 1 dia completo, em milissegundos
   });
 
+  const {data: user} = useContext(UserContext)
+
   const [orderBy, setOrderBy] = useState<string>('asc');
   const [name, setName] = useState<string>('');
 
-  let count = 0;
-  data?.map((item) => {
-    if (item.donated) {
-      count += 1;
-    }
-  });
+  const count = user.donatedArtsIds.length
   const percentage = (count * 100) / data?.length!;
 
   const useSortedAndFilteredData = (data: Art[], orderBy: string) => {
@@ -42,16 +40,16 @@ export function ArtsPage() {
           return [...data].sort((a, b) => b.name.localeCompare(a.name));
 
         case 'low':
-          return [...data].sort((a, b) => a.sellPrice - b.sellPrice);
+          return [...data].sort((a, b) => a.sell_price - b.sell_price);
 
         case 'high':
-          return [...data].sort((a, b) => b.sellPrice - a.sellPrice);
+          return [...data].sort((a, b) => b.sell_price - a.sell_price);
 
         case 'donated':
-          return data.filter((art) => art.donated);
+          return data.filter((art) => user.donatedArtsIds.includes(art.id));
 
         case 'not-donated':
-          return data.filter((art) => !art.donated);
+          return data.filter((art) => !user.donatedArtsIds.includes(art.id));
 
         default:
           return [...data].sort((a, b) => a.name.localeCompare(b.name));

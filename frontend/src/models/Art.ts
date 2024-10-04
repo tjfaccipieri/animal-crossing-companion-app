@@ -2,28 +2,28 @@ export interface Art {
   id: string
   name: string
   image: string
-  hiResTexture: string
+  hi_res_texture: string
   genuine: string
   category: string
-  buyPrice: number
-  sellPrice: number
+  buy_price: number
+  sell_price: number
   color1: string
   color2: string
   size: string
-  realArtworkTitle: string
+  real_artwork_title: string
   artist: string
   description: string
   source: string
-  sourceNotes: string
-  hhaBasePoints: number
-  hhaConcept1: string
-  hhaConcept2: string
-  hhaSeries: string
-  hhaSet: string
+  source_notes: string
+  hha_base_points: number
+  hha_concept1: string
+  hha_concept2: string
+  hha_series: string
+  hha_set: string
   interact: string
   tag: string
-  speakerType: string
-  lightingType: string
+  speaker_type: string
+  lighting_type: string
   catalog: string
   unlocked: string
   donated: boolean

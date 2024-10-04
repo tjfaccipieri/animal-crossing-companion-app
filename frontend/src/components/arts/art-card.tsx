@@ -1,10 +1,11 @@
 import Modal from "react-responsive-modal";
 import type { Art } from "../../models/Art";
 import bells from '/bells.webp'
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { TbTextPlus } from "react-icons/tb";
 import { ArtsDetails } from "./arts-details";
 import { CheckedDonate } from "../ui/checked-donate";
+import { UserContext } from "../../context/UserContext";
 
 interface ArtItemProps {
   item: Art
@@ -15,6 +16,8 @@ export function ArtCard({item}: ArtItemProps) {
 
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
+
+  const {data: user} = useContext(UserContext)
 
   return (
     <div
@@ -28,9 +31,7 @@ export function ArtCard({item}: ArtItemProps) {
             alt="Bug icon in game"
             className="h-16 w-16 bg-amber-100 rounded-lg p-1"
           />
-          {item.donated && (
-            <CheckedDonate />
-          )}
+          {user.donatedArtsIds.includes(item.id) && <CheckedDonate />}
         </div>
         <h3 className="capitalize font-medium text-lg flex-1">{item.name}</h3>
         <button
@@ -44,7 +45,7 @@ export function ArtCard({item}: ArtItemProps) {
       <div className="flex flex-col gap-2">
         <div className="card_attributes_line">
           <span className="card_attributes_title w-36">Real Name</span>
-          <div className="card_attributes_content "><span>{item.realArtworkTitle}</span></div>
+          <div className="card_attributes_content "><span>{item.real_artwork_title}</span></div>
         </div>
         <div className="card_attributes_line">
           <span className="card_attributes_title w-36">
@@ -57,7 +58,7 @@ export function ArtCard({item}: ArtItemProps) {
             <img src={bells} alt="" className="h-6" /> Sell
           </span>
           <div className="card_attributes_content">
-            <span>{item.sellPrice} bells</span>
+            <span>{item.sell_price} bells</span>
           </div>
         </div>
         <div className="card_attributes_line">
@@ -65,7 +66,7 @@ export function ArtCard({item}: ArtItemProps) {
             <img src={bells} alt="" className="h-6" /> Buy
           </span>
           <div className="card_attributes_content">
-            <span className="">{item.buyPrice} bells</span>
+            <span className="">{item.buy_price} bells</span>
           </div>
         </div>
       </div>

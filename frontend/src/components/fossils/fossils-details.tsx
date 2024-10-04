@@ -1,12 +1,16 @@
+import { useContext } from 'react';
 import type { Fossil } from '../../models/Fossil';
 import { SwitchDonate } from '../ui/switch-donate';
 import coruja from '/coruja.webp';
+import { UserContext } from '../../context/UserContext';
 
 interface FossilProps {
   fossil: Fossil;
 }
 
 export function FossilsDetails({ fossil }: FossilProps) {
+  const {data: user} = useContext(UserContext)
+
   return (
     <div className="bg-amber-900 text-amber-100 flex flex-col gap-2 font-serif">
       <h1 className="font-bold font-mono text-4xl capitalize text-center mb-3 flex items-center justify-around">
@@ -15,7 +19,7 @@ export function FossilsDetails({ fossil }: FossilProps) {
       <div className="card_attributes_line">
         <span className="card_attributes_title w-52">Fossil Group</span>
         <span className="card_attributes_content capitalize">
-          {fossil.fossilGroup}
+          {fossil.fossil_group}
         </span>
       </div>
       <div className="card_attributes_line">
@@ -43,9 +47,10 @@ export function FossilsDetails({ fossil }: FossilProps) {
           <figcaption>Donated?</figcaption>
         </figure>
         <SwitchDonate
-          donated={fossil.donated}
+          donated={user.donatedFossilsIds.includes(fossil.id)}
           id={fossil.id}
           route={'fossils'}
+          type='fossil'
         />
       </div>
     </div>

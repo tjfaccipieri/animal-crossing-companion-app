@@ -1,12 +1,17 @@
-import construction from '/gyroid.webp';
+import { useContext } from 'react';
+import { ProgressDonateHome } from '../components/ui/progress-donate-home';
+import { TurnipPerDay } from '../components/ui/turnip-per-day';
+import { UserContext } from '../context/UserContext';
 
 export function Home() {
+  const { data: user } = useContext(UserContext);
+
   return (
     <div className="container mx-auto my-4">
       <h1 className="font-bold text-center text-4xl text-amber-950 font-custom tracking-wide">
         Animal Crossing New Horizons - Companion APP
       </h1>
-      {/* <div className="grid grid-cols-3">
+      <div className="grid grid-cols-3">
         <div className="flex flex-col gap-2 px-3 py-2 border-2 rounded-lg bg-amber-400 w-fit border-amber-950 h-fit">
           <h2 className="font-mono text-xl font-bold text-center text-amber-950">
             Turnip Price
@@ -27,17 +32,16 @@ export function Home() {
           <TurnipPerDay day={'fri'} />
           <TurnipPerDay day={'sat'} />
         </div>
-        <div className='col-span-2'>
-
+        <div className="col-span-2">
+          <h2>Total donations for {user.username}</h2>
+          <div className="grid gap-2">
+            <ProgressDonateHome title="Bugs" count={user.totalDonatedBugs} total={80} />
+            <ProgressDonateHome title="Fishes" count={user.totalDonatedFishes} total={80} />
+            <ProgressDonateHome title="Sea Creatures" count={user.totalDonatedSeaCreatures} total={40} />
+            <ProgressDonateHome title="Fossils" count={user.totalDonatedFossil} total={73} />
+            <ProgressDonateHome title="Arts" count={user.totalDonatedArt} total={43} />
+          </div>
         </div>
-      </div> */}
-      <div className='flex flex-col items-center gap-8 mt-8'>
-        <p className="font-bold text-center text-2xl text-amber-950">
-          This page is under construction and awaiting donations from our
-          residents. Please use the navbar so our Dodos can take you somewhere
-          more useful.
-        </p>
-        <img src={construction} alt="" />
       </div>
     </div>
   );

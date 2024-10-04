@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { TbTextPlus } from 'react-icons/tb';
 import Modal from 'react-responsive-modal';
 import type { Fossil } from '../../models/Fossil';
 import { CheckedDonate } from '../ui/checked-donate';
 import { FossilsDetails } from './fossils-details';
 import bells from '/bells.webp';
+import { UserContext } from '../../context/UserContext';
 
 interface FossilItemProps {
   item: Fossil;
@@ -15,6 +16,8 @@ export function FossilCard({ item }: FossilItemProps) {
 
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
+
+  const {data: user} = useContext(UserContext)
 
   return (
     <div
@@ -28,7 +31,7 @@ export function FossilCard({ item }: FossilItemProps) {
             alt="Bug icon in game"
             className="h-16 w-16 bg-amber-100 rounded-lg p-1"
           />
-          {item.donated && <CheckedDonate />}
+          {user.donatedFossilsIds.includes(item.id) && <CheckedDonate />}
         </div>
         <h3 className="capitalize font-medium text-lg flex-1">{item.name}</h3>
         <button
@@ -59,7 +62,7 @@ export function FossilCard({ item }: FossilItemProps) {
             <img src={bells} alt="" className="h-6" />
           </span>
           <div className="card_attributes_content">
-            <span>{item.sellPrice} bells</span>
+            <span>{item.sell_price} bells</span>
           </div>
         </div>
       </div>

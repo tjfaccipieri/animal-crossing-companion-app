@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { TbTextPlus } from 'react-icons/tb';
 import Modal from 'react-responsive-modal';
 import type { Bug } from '../../models/Bug';
 import { CheckedDonate } from '../ui/checked-donate';
 import { BugsDetails } from './bugs-details';
 import bells from '/bells.webp';
+import { UserContext } from '../../context/UserContext';
 
 interface BugItemProps {
   item: Bug;
@@ -16,6 +17,8 @@ export function BugCard({ item }: BugItemProps) {
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
 
+  const {data: user} = useContext(UserContext)
+
   return (
     <div
       key={item.id}
@@ -24,11 +27,11 @@ export function BugCard({ item }: BugItemProps) {
       <div className="flex items-center mr-auto w-full rounded-lg gap-3">
         <div className="relative">
           <img
-            src={item.iconImage}
+            src={item.icon_image}
             alt="Bug icon in game"
             className="h-16 w-16 bg-amber-100 rounded-lg p-1"
           />
-          {item.donated && <CheckedDonate />}
+          {user.donatedBugsIds.includes(item.id) && <CheckedDonate />}
         </div>
         <h3 className="capitalize font-medium text-lg flex-1">{item.name}</h3>
         <button
@@ -43,7 +46,7 @@ export function BugCard({ item }: BugItemProps) {
         <div className="card_attributes_line">
           <span className="card_attributes_title">Where</span>
           <div className="card_attributes_content">
-            <span>{item.whereHow}</span>
+            <span>{item.where_how}</span>
           </div>
         </div>
         <div className="card_attributes_line">
@@ -57,7 +60,7 @@ export function BugCard({ item }: BugItemProps) {
             <img src={bells} alt="" className="h-6" />
           </span>
           <div className="card_attributes_content">
-            <span>{item.sellPrice} bells</span>
+            <span>{item.sell_price} bells</span>
           </div>
         </div>
       </div>

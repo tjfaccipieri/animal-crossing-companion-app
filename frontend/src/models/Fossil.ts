@@ -3,10 +3,10 @@ export interface Fossil {
   donated: boolean
   name: string
   image: string
-  sellPrice: number
-  fossilGroup: string
+  sell_price: number
+  fossil_group: string
   description: string
-  hhaBasePoints: number
+  hha_base_points: number
   color1: string
   color2: string
   size: string

@@ -2,6 +2,7 @@ package com.tjfaccipieri.acnh_companion.controller;
 
 import com.tjfaccipieri.acnh_companion.model.Bugs;
 import com.tjfaccipieri.acnh_companion.model.DTO.UserDonation;
+import com.tjfaccipieri.acnh_companion.model.DTO.UserResponseBasic;
 import com.tjfaccipieri.acnh_companion.model.User;
 import com.tjfaccipieri.acnh_companion.repository.BugsRepository;
 import com.tjfaccipieri.acnh_companion.repository.UserRepository;
@@ -34,6 +35,7 @@ public class UserController {
   @GetMapping("/{id}")
   public ResponseEntity<User> getUserById(@PathVariable Long id) {
     return userRepository.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    //return usersService.getUserBasics(id);
   }
   
   @GetMapping
@@ -44,6 +46,11 @@ public class UserController {
   @PostMapping("/donate")
   public ResponseEntity<?> donate(@RequestBody UserDonation donation) {
     return usersService.donation(donation);
+  }
+  
+  @PostMapping("/undo-donate")
+  public ResponseEntity<?> undoDonate(@RequestBody UserDonation donation) {
+    return usersService.undoDonation(donation);
   }
   
   @GetMapping("/{userId}/donated")

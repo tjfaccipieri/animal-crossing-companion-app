@@ -1,5 +1,7 @@
 package com.tjfaccipieri.acnh_companion.model;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,6 +9,7 @@ import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "tb_users")
@@ -31,7 +34,7 @@ public class User {
       joinColumns = @JoinColumn(name = "user_id"),
       inverseJoinColumns = @JoinColumn(name = "bug_id")
   )
-  @JsonIgnoreProperties("donatedByUsers")
+  @JsonIgnore
   private Set<Bugs> donatedBugs = new HashSet<>();
   
   @ManyToMany(fetch = FetchType.LAZY)
@@ -40,7 +43,7 @@ public class User {
       joinColumns = @JoinColumn(name = "user_id"),
       inverseJoinColumns = @JoinColumn(name = "fish_id")
   )
-  @JsonIgnoreProperties("donatedByUsers")
+  @JsonIgnore
   private Set<Fishes> donatedFishes = new HashSet<>();
   
   @ManyToMany(fetch = FetchType.LAZY)
@@ -49,7 +52,7 @@ public class User {
       joinColumns = @JoinColumn(name = "user_id"),
       inverseJoinColumns = @JoinColumn(name = "sea_creature_id")
   )
-  @JsonIgnoreProperties("donatedByUsers")
+  @JsonIgnore
   private Set<SeaCreatures> donatedSeaCreatures = new HashSet<>();
 
   @ManyToMany(fetch = FetchType.LAZY)
@@ -58,7 +61,7 @@ public class User {
           joinColumns = @JoinColumn(name = "user_id"),
           inverseJoinColumns = @JoinColumn(name = "fossil_id")
   )
-  @JsonIgnoreProperties("donatedByUsers")
+  @JsonIgnore
   private Set<Fossils> donatedFossils = new HashSet<>();
 
   @ManyToMany(fetch = FetchType.LAZY)
@@ -67,7 +70,7 @@ public class User {
           joinColumns = @JoinColumn(name = "user_id"),
           inverseJoinColumns = @JoinColumn(name = "art_id")
   )
-  @JsonIgnoreProperties("donatedByUsers")
+  @JsonIgnore
   private Set<Arts> donatedArts = new HashSet<>();
   
   public void donateBug(Bugs bug) {
@@ -134,5 +137,42 @@ public class User {
   }
   public int getTotalDonatedArt() {
     return donatedArts.size();
+  }
+  
+  
+  // Getters personalizados pra retornar só os IDs dos ManyToMany
+  @JsonGetter("donatedBugsIds")
+  public Set<String> getDonatedBugsIds() {
+    return donatedBugs.stream()
+        .map(Bugs::getId)
+        .collect(Collectors.toSet());
+  }
+  
+  @JsonGetter("donatedFishesIds")
+  public Set<String> getDonatedFishIds() {
+    return donatedFishes.stream()
+        .map(Fishes::getId)
+        .collect(Collectors.toSet());
+  }
+  
+  @JsonGetter("donatedSeaCreaturesIds")
+  public Set<String> getDonatedSeaCreaturesIds() {
+    return donatedSeaCreatures.stream()
+        .map(SeaCreatures::getId)
+        .collect(Collectors.toSet());
+  }
+  
+  @JsonGetter("donatedFossilsIds")
+  public Set<String> getDonatedFossilsIds() {
+    return donatedFossils.stream()
+        .map(Fossils::getId)
+        .collect(Collectors.toSet());
+  }
+  
+  @JsonGetter("donatedArtsIds")
+  public Set<String> getDonatedArtsIds() {
+    return donatedArts.stream()
+        .map(Arts::getId)
+        .collect(Collectors.toSet());
   }
 }

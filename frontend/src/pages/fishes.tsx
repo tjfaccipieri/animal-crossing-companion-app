@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import { type ChangeEvent, useMemo, useState } from 'react';
+import { type ChangeEvent, useContext, useMemo, useState } from 'react';
 import { FishCard } from '../components/fishes/fish-card';
 import { EmptyList } from '../components/ui/empty-list';
 import { LoadingScreen } from '../components/ui/loading-screen';
 import { ProgressDonate } from '../components/ui/progress-donate';
 import type { Fish } from '../models/Fish';
 import { SelectFilter } from '../components/ui/select-filter';
+import { UserContext } from '../context/UserContext';
 
 export function FishesPage() {
   const { data, isLoading } = useQuery<Fish[]>({
@@ -18,15 +19,12 @@ export function FishesPage() {
     staleTime: 1000 * 60 * 60 * 24, // 1 dia completo, em milissegundos
   });
 
+  const {data: user} = useContext(UserContext)
+
   const [orderBy, setOrderBy] = useState<string>('asc');
   const [name, setName] = useState<string>('');
 
-  let count = 0;
-  data?.map((item) => {
-    if (item.donated) {
-      count += 1;
-    }
-  });
+  const count = user.donatedFishesIds.length
   const percentage = (count * 100) / data?.length!;
 
   const useSortedAndFilteredData = (data: Fish[], orderBy: string) => {
@@ -47,10 +45,10 @@ export function FishesPage() {
           return [...data].sort((a, b) => b.sell - a.sell);
 
         case 'donated':
-          return data.filter((fish) => fish.donated);
+          return data.filter((fish) => user.donatedFishesIds.includes(fish.id));
 
         case 'not-donated':
-          return data.filter((fish) => !fish.donated);
+          return data.filter((fish) => !user.donatedFishesIds.includes(fish.id));
 
         default:
           return [...data].sort((a, b) => a.name.localeCompare(b.name));

@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import { type ChangeEvent, useMemo, useState } from 'react';
+import { type ChangeEvent, useContext, useMemo, useState } from 'react';
 import { BugCard } from '../components/bugs/bug-card';
 import { EmptyList } from '../components/ui/empty-list';
 import { LoadingScreen } from '../components/ui/loading-screen';
 import { ProgressDonate } from '../components/ui/progress-donate';
 import { SelectFilter } from '../components/ui/select-filter';
 import type { Bug } from '../models/Bug';
+import { UserContext } from '../context/UserContext';
 
 export function BugsPage() {
   const { data, isLoading } = useQuery<Bug[]>({
@@ -19,15 +20,12 @@ export function BugsPage() {
 
   });
 
+  const {data: user} = useContext(UserContext)
+
   const [orderBy, setOrderBy] = useState<string>('asc');
   const [name, setName] = useState<string>('');
 
-  let count = 0;
-  data?.map((item) => {
-    if (item.donated) {
-      count += 1;
-    }
-  });
+  const count = user.donatedBugsIds.length
   const percentage = (count * 100) / data?.length!;
 
   const useSortedAndFilteredData = (data: Bug[], orderBy: string) => {
@@ -42,16 +40,16 @@ export function BugsPage() {
           return [...data].sort((a, b) => b.name.localeCompare(a.name));
 
         case 'low':
-          return [...data].sort((a, b) => a.sellPrice - b.sellPrice);
+          return [...data].sort((a, b) => a.sell_price - b.sell_price);
 
         case 'high':
-          return [...data].sort((a, b) => b.sellPrice - a.sellPrice);
+          return [...data].sort((a, b) => b.sell_price - a.sell_price);
 
         case 'donated':
-          return data.filter((bug) => bug.donated);
+          return data.filter((bug) => user.donatedBugsIds.includes(bug.id));
 
         case 'not-donated':
-          return data.filter((bug) => !bug.donated);
+          return data.filter((bug) => !user.donatedBugsIds.includes(bug.id));
 
         default:
           return [...data].sort((a, b) => a.name.localeCompare(b.name));

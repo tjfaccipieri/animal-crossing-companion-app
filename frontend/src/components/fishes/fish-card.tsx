@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { TbTextPlus } from 'react-icons/tb';
 import Modal from 'react-responsive-modal';
 import type { Fish } from '../../models/Fish';
 import { CheckedDonate } from '../ui/checked-donate';
 import { FishesDetails } from './fishes-details';
 import bells from '/bells.webp';
+import { UserContext } from '../../context/UserContext';
 
 interface FishItemProps {
   item: Fish;
@@ -16,6 +17,8 @@ export function FishCard({ item }: FishItemProps) {
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
 
+  const {data: user} = useContext(UserContext)
+
   return (
     <div
       key={item.id}
@@ -24,11 +27,11 @@ export function FishCard({ item }: FishItemProps) {
       <div className="flex items-center mr-auto w-full rounded-lg gap-3">
         <div className="relative">
           <img
-            src={item.iconImage}
+            src={item.icon_image}
             alt="Bug icon in game"
             className="h-16 w-16 bg-amber-100 rounded-lg p-1"
           />
-          {item.donated && <CheckedDonate />}
+          {user.donatedFishesIds.includes(item.id) && <CheckedDonate />}
         </div>
         <h3 className="capitalize font-medium text-lg flex-1">{item.name}</h3>
         <button
@@ -43,7 +46,7 @@ export function FishCard({ item }: FishItemProps) {
         <div className="card_attributes_line">
           <span className="card_attributes_title">Where</span>
           <div className="card_attributes_content">
-            <span>{item.whereHow}</span>
+            <span>{item.where_how}</span>
           </div>
         </div>
         <div className="card_attributes_line">

@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { TbTextPlus } from 'react-icons/tb';
 import Modal from 'react-responsive-modal';
 import type { SeaCreature } from '../../models/SeaCreature';
 import { CheckedDonate } from '../ui/checked-donate';
 import { SeaCreaturesDetails } from './seaCreature-details';
 import bells from '/bells.webp';
+import { UserContext } from '../../context/UserContext';
 
 interface SeaCreatureItemProps {
   item: SeaCreature;
@@ -16,6 +17,8 @@ export function SeaCreatureCard({ item }: SeaCreatureItemProps) {
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
 
+  const {data: user} = useContext(UserContext)
+
   return (
     <div
       key={item.id}
@@ -24,11 +27,11 @@ export function SeaCreatureCard({ item }: SeaCreatureItemProps) {
       <div className="flex items-center mr-auto w-full rounded-lg gap-3">
         <div className="relative">
           <img
-            src={item.iconImage}
+            src={item.icon_image}
             alt="Bug icon in game"
             className="h-16 w-16 bg-amber-100 rounded-lg p-1"
           />
-          {item.donated && <CheckedDonate />}
+          {user.donatedSeaCreaturesIds.includes(item.id) && <CheckedDonate />}
         </div>
         <h3 className="capitalize font-medium text-lg flex-1">{item.name}</h3>
         <button
@@ -43,7 +46,7 @@ export function SeaCreatureCard({ item }: SeaCreatureItemProps) {
         <div className="card_attributes_line">
           <span className="card_attributes_title">Speed</span>
           <div className="card_attributes_content">
-            <span>{item.movementSpeed}</span>
+            <span>{item.movement_speed}</span>
           </div>
         </div>
         <div className="card_attributes_line">
@@ -59,7 +62,7 @@ export function SeaCreatureCard({ item }: SeaCreatureItemProps) {
             <img src={bells} alt="" className="h-6" />
           </span>
           <div className="card_attributes_content">
-            <span>{item.sellPrice} bells</span>
+            <span>{item.sell_price} bells</span>
           </div>
         </div>
       </div>

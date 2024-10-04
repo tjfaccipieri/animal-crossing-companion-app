@@ -1,48 +1,48 @@
 export interface Bug {
   id: string
   name: string
-  iconImage: string
-  critterpediaImage: string
-  furnitureImage: string
-  sellPrice: number
-  whereHow: string
+  icon_image: string
+  critterpedia_image: string
+  furniture_image: string
+  sell_price: number
+  where_how: string
   weather: string
-  totalCatchesToUnlock: number
-  spawnRates: string
-  nhJan: string
-  nhFeb: string
-  nhMar: string
-  nhApr: string
-  nhMay: string
-  nhJun: string
-  nhJul: string
-  nhAug: string
-  nhSep: string
-  nhOct: string
-  nhNov: string
-  nhDec: string
-  shJan: string
-  shFeb: string
-  shMar: string
-  shApr: string
-  shMay: string
-  shJun: string
-  shJul: string
-  shAug: string
-  shSep: string
-  shOct: string
-  shNov: string
-  shDec: string
+  total_catches_to_unlock: number
+  spawn_rates: string
+  nh_jan: string
+  nh_feb: string
+  nh_mar: string
+  nh_apr: string
+  nh_may: string
+  nh_jun: string
+  nh_jul: string
+  nh_aug: string
+  nh_sep: string
+  nh_oct: string
+  nh_nov: string
+  nh_dec: string
+  sh_jan: string
+  sh_feb: string
+  sh_mar: string
+  sh_apr: string
+  sh_may: string
+  sh_jun: string
+  sh_jul: string
+  sh_aug: string
+  sh_sep: string
+  sh_oct: string
+  sh_nov: string
+  sh_dec: string
   size: string
   surface: string
   description: string
-  catchPhrase: string
-  hhaBasePoints: number
-  hhaCategory: string
+  catch_phrase: string
+  hha_base_points: number
+  hha_category: string
   color1: string
   color2: string
   donated: boolean
-  critterpediaOrder: number
-  flickSellPrice: number
+  critterpedia_order: number
+  flick_sell_price: number
   rarity: string
 }

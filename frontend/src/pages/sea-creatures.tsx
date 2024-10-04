@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import { type ChangeEvent, useMemo, useState } from 'react';
+import { type ChangeEvent, useContext, useMemo, useState } from 'react';
 import { SeaCreatureCard } from '../components/seaCreatures/seaCreature-card';
 import { EmptyList } from '../components/ui/empty-list';
 import { LoadingScreen } from '../components/ui/loading-screen';
 import { ProgressDonate } from '../components/ui/progress-donate';
 import type { SeaCreature } from '../models/SeaCreature';
 import { SelectFilter } from '../components/ui/select-filter';
+import { UserContext } from '../context/UserContext';
 
 export function SeaCreaturesPage() {
   const { data, isLoading } = useQuery<SeaCreature[]>({
@@ -18,15 +19,12 @@ export function SeaCreaturesPage() {
     staleTime: 1000 * 60 * 60 * 24, // 1 dia completo, em milissegundos
   });
 
+  const {data: user} = useContext(UserContext)
+
   const [orderBy, setOrderBy] = useState<string>('asc');
   const [name, setName] = useState<string>('');
 
-  let count = 0;
-  data?.map((item) => {
-    if (item.donated) {
-      count += 1;
-    }
-  });
+  const count = user.donatedSeaCreaturesIds.length
   const percentage = (count * 100) / data?.length!;
 
   const useSortedAndFilteredData = (data: SeaCreature[], orderBy: string) => {
@@ -41,16 +39,16 @@ export function SeaCreaturesPage() {
           return [...data].sort((a, b) => b.name.localeCompare(a.name));
 
         case 'low':
-          return [...data].sort((a, b) => a.sellPrice - b.sellPrice);
+          return [...data].sort((a, b) => a.sell_price - b.sell_price);
 
         case 'high':
-          return [...data].sort((a, b) => b.sellPrice - a.sellPrice);
+          return [...data].sort((a, b) => b.sell_price - a.sell_price);
 
         case 'donated':
-          return data.filter((seaCreature) => seaCreature.donated);
+          return data.filter((seaCreature) => user.donatedSeaCreaturesIds.includes(seaCreature.id));
 
         case 'not-donated':
-          return data.filter((seaCreature) => !seaCreature.donated);
+          return data.filter((seaCreature) => !user.donatedSeaCreaturesIds.includes(seaCreature.id));
 
         default:
           return [...data].sort((a, b) => a.name.localeCompare(b.name));

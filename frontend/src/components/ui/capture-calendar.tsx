@@ -31,37 +31,37 @@ export function CaptureCalendar({ item }: CaptureCalendarProps) {
           <li className="flex overflow-hidden text-center border-2 rounded bg-amber-950 border-amber-950">
             <span className="w-1/4 px-2">Jan</span>{' '}
             <span className="flex-1 bg-amber-200 text-amber-950">
-              {hemisphere === 'south' ? item.shJan : item.nhJan}
+              {hemisphere === 'south' ? item.sh_jan : item.nh_jan}
             </span>
           </li>
           <li className="flex overflow-hidden text-center border-2 rounded bg-amber-950 border-amber-950">
             <span className="w-1/4 px-2">Feb</span>{' '}
             <span className="flex-1 bg-amber-200 text-amber-950">
-              {hemisphere === 'south' ? item.shFeb : item.nhFeb}
+              {hemisphere === 'south' ? item.sh_feb : item.nh_feb}
             </span>
           </li>
           <li className="flex overflow-hidden text-center border-2 rounded bg-amber-950 border-amber-950">
             <span className="w-1/4 px-2">Mar</span>{' '}
             <span className="flex-1 bg-amber-200 text-amber-950">
-              {hemisphere === 'south' ? item.shMar : item.nhMar}
+              {hemisphere === 'south' ? item.sh_mar : item.nh_mar}
             </span>
           </li>
           <li className="flex overflow-hidden text-center border-2 rounded bg-amber-950 border-amber-950">
             <span className="w-1/4 px-2">Apr</span>{' '}
             <span className="flex-1 bg-amber-200 text-amber-950">
-              {hemisphere === 'south' ? item.shApr : item.nhApr}
+              {hemisphere === 'south' ? item.sh_apr : item.nh_apr}
             </span>
           </li>
           <li className="flex overflow-hidden text-center border-2 rounded bg-amber-950 border-amber-950">
             <span className="w-1/4 px-2">May</span>{' '}
             <span className="flex-1 bg-amber-200 text-amber-950">
-              {hemisphere === 'south' ? item.shMay : item.nhMay}
+              {hemisphere === 'south' ? item.sh_may : item.nh_may}
             </span>
           </li>
           <li className="flex overflow-hidden text-center border-2 rounded bg-amber-950 border-amber-950">
             <span className="w-1/4 px-2">Jun</span>{' '}
             <span className="flex-1 bg-amber-200 text-amber-950">
-              {hemisphere === 'south' ? item.shJun : item.nhJun}
+              {hemisphere === 'south' ? item.sh_jun : item.nh_jun}
             </span>
           </li>
         </div>
@@ -69,37 +69,37 @@ export function CaptureCalendar({ item }: CaptureCalendarProps) {
           <li className="flex overflow-hidden text-center border-2 rounded bg-amber-950 border-amber-950">
             <span className="w-1/4 px-2">Jul</span>{' '}
             <span className="flex-1 bg-amber-200 text-amber-950">
-              {hemisphere === 'south' ? item.shJul : item.nhJul}
+              {hemisphere === 'south' ? item.sh_jul : item.nh_jul}
             </span>
           </li>
           <li className="flex overflow-hidden text-center border-2 rounded bg-amber-950 border-amber-950">
             <span className="w-1/4 px-2">Aug</span>{' '}
             <span className="flex-1 bg-amber-200 text-amber-950">
-              {hemisphere === 'south' ? item.shAug : item.nhAug}
+              {hemisphere === 'south' ? item.sh_aug : item.nh_aug}
             </span>
           </li>
           <li className="flex overflow-hidden text-center border-2 rounded bg-amber-950 border-amber-950">
             <span className="w-1/4 px-2">Sep</span>{' '}
             <span className="flex-1 bg-amber-200 text-amber-950">
-              {hemisphere === 'south' ? item.shSep : item.nhSep}
+              {hemisphere === 'south' ? item.sh_sep : item.nh_sep}
             </span>
           </li>
           <li className="flex overflow-hidden text-center border-2 rounded bg-amber-950 border-amber-950">
             <span className="w-1/4 px-2">Oct</span>{' '}
             <span className="flex-1 bg-amber-200 text-amber-950">
-              {hemisphere === 'south' ? item.shOct : item.nhOct}
+              {hemisphere === 'south' ? item.sh_oct : item.nh_oct}
             </span>
           </li>
           <li className="flex overflow-hidden text-center border-2 rounded bg-amber-950 border-amber-950">
             <span className="w-1/4 px-2">Nov</span>{' '}
             <span className="flex-1 bg-amber-200 text-amber-950">
-              {hemisphere === 'south' ? item.shNov : item.nhNov}
+              {hemisphere === 'south' ? item.sh_nov : item.nh_nov}
             </span>
           </li>
           <li className="flex overflow-hidden text-center border-2 rounded bg-amber-950 border-amber-950">
             <span className="w-1/4 px-2">Dec</span>{' '}
             <span className="flex-1 bg-amber-200 text-amber-950">
-              {hemisphere === 'south' ? item.shDec : item.nhDec}
+              {hemisphere === 'south' ? item.sh_dec : item.nh_dec}
             </span>
           </li>
         </div>
