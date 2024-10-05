@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS "tb_arts" (
   "catalog" text,
   "unlocked" text,
   "donated" boolean,
-  "id" text,
+  "id" text PRIMARY KEY,
   "high-res_texture" text NULL
 );
 
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS "tb_bugs" (
   "color1" text,
   "color2" text,
   "donated" boolean,
-  "id" text,
+  "id" text PRIMARY KEY,
   "critterpedia_order" bigint
 );
 
@@ -283,7 +283,7 @@ CREATE TABLE IF NOT EXISTS "tb_fishes" (
   "color1" text,
   "color2" text,
   "lighting_type" text,
-  "id" text,
+  "id" text PRIMARY KEY,
   "critterpedia_order" bigint,
   "rarity" text,
   "cj_sell_price" bigint
@@ -389,7 +389,7 @@ CREATE TABLE IF NOT EXISTS "tb_fossils" (
   "museum" text,
   "interact" text NULL,
   "catalog" text,
-  "id" text,
+  "id" text PRIMARY KEY,
   "Interact" text NULL
 );
 
@@ -515,7 +515,7 @@ CREATE TABLE IF NOT EXISTS "tb_sea_creatures" (
   "color2" text,
   "lighting_type" text,
   "unlocked" text,
-  "id" text
+  "id" text PRIMARY KEY
 );
 
 INSERT INTO "tb_sea_creatures" ("name","donated","icon_image","critterpedia_image","furniture_image","sell_price","shadow","movement_speed","total_catches_to_unlock","spawn_rates","nh_jan","nh_feb","nh_mar","nh_apr","nh_may","nh_jun","nh_jul","nh_aug","nh_sep","nh_oct","nh_nov","nh_dec","sh_jan","sh_feb","sh_mar","sh_apr","sh_may","sh_jun","sh_jul","sh_aug","sh_sep","sh_oct","sh_nov","sh_dec","size","surface","description","catch_phrase","hha_base_points","hha_category","color1","color2","lighting_type","unlocked","id")
@@ -581,7 +581,7 @@ CREATE TABLE IF NOT EXISTS "tb_villagers" (
   "color2" text,
   "name_color" text,
   "bubble_color" text,
-  "id" text
+  "id" text PRIMARY KEY
 );
 
 INSERT INTO "tb_villagers" ("name","icon_image","photo_image","species","gender","personality","hobby","birthday","catchphrase","favorite_song","favorite_saying","style1","style2","color1","color2","name_color","bubble_color","id")

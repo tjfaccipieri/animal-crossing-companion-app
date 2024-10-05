@@ -1,8 +1,6 @@
 package com.tjfaccipieri.acnh_companion.controller;
 
-import com.tjfaccipieri.acnh_companion.model.Bugs;
-import com.tjfaccipieri.acnh_companion.model.DTO.UserDonation;
-import com.tjfaccipieri.acnh_companion.model.DTO.UserResponseBasic;
+import com.tjfaccipieri.acnh_companion.model.DTO.UsersDTO.UserDonation;
 import com.tjfaccipieri.acnh_companion.model.User;
 import com.tjfaccipieri.acnh_companion.repository.BugsRepository;
 import com.tjfaccipieri.acnh_companion.repository.UserRepository;
@@ -24,9 +22,6 @@ public class UserController {
   @Autowired
   private UsersService usersService;
   
-  @Autowired
-  private BugsRepository bugsRepository;
-  
   @PostMapping
   public ResponseEntity<User> createUser(@RequestBody User user) {
     return ResponseEntity.ok(userRepository.save(user));
@@ -35,7 +30,6 @@ public class UserController {
   @GetMapping("/{id}")
   public ResponseEntity<User> getUserById(@PathVariable Long id) {
     return userRepository.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
-    //return usersService.getUserBasics(id);
   }
   
   @GetMapping
@@ -53,6 +47,7 @@ public class UserController {
     return usersService.undoDonation(donation);
   }
   
+  // nem sei pq isso ta aqui, tem que ver depois
   @GetMapping("/{userId}/donated")
   public ResponseEntity<?> getDonatedBugsByUser(@PathVariable Long userId) {
     User user = userRepository.findById(userId).orElse(null);

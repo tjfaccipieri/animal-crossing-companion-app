@@ -50,7 +50,7 @@ export function TurnipPerDay({day}: TurnipPerDayProps) {
     const intervalId = setInterval(() => {
       const currentDay = new Date().getDay();
       setIsSunday(currentDay === 0);
-    }, 5); // Check every day at midnight
+    }, 24*60*60*1000); // Check every day at midnight
 
     console.log(new Date().getDay());
 

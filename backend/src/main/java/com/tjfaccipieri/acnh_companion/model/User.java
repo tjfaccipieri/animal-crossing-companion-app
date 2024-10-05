@@ -29,8 +29,8 @@ public class User {
   private String email;
 
   @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "island_id", referencedColumnName = "id")
-  private Island island;
+  @JsonIgnoreProperties("user")
+  private Islands island;
   
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(

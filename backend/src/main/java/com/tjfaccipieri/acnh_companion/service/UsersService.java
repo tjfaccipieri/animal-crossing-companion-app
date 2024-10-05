@@ -1,15 +1,12 @@
 package com.tjfaccipieri.acnh_companion.service;
 
 import com.tjfaccipieri.acnh_companion.model.*;
-import com.tjfaccipieri.acnh_companion.model.DTO.UserDonation;
-import com.tjfaccipieri.acnh_companion.model.DTO.UserResponseBasic;
+import com.tjfaccipieri.acnh_companion.model.DTO.UsersDTO.UserDonation;
 import com.tjfaccipieri.acnh_companion.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.Objects;
 
 @Service
 public class UsersService {
@@ -149,24 +146,6 @@ public class UsersService {
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
   
-  public ResponseEntity<UserResponseBasic> getUserBasics(Long userId) {
-    User user = userRepository.findById(userId).orElse(null);
-    UserResponseBasic userBasic = new UserResponseBasic();
-    
-    if (user == null) {
-      return ResponseEntity.notFound().build();
-    }
-    
-    userBasic.setId(user.getId());
-    userBasic.setUsername(user.getUsername());
-    userBasic.setEmail(user.getEmail());
-    userBasic.setTotalDonatedBugs(user.getTotalDonatedBugs());
-    userBasic.setTotalDonatedFishes(user.getTotalDonatedFishes());
-    userBasic.setTotalDonatedSeaCreatures(user.getTotalDonatedSeaCreatures());
-    userBasic.setTotalDonatedFossil(user.getTotalDonatedFossil());
-    userBasic.setTotalDonatedArt(user.getTotalDonatedArt());
-    
-    return ResponseEntity.ok(userBasic);
-  }
+  
   
 }

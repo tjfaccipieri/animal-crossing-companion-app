@@ -1,10 +1,7 @@
 package com.tjfaccipieri.acnh_companion.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,6 +27,8 @@ public class Arts {
   private String size;
   private String real_artwork_title;
   private String artist;
+  
+  @Column(name = "description", columnDefinition = "text")
   private String description;
   private String source;
   private String source_notes;

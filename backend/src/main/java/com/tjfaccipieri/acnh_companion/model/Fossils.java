@@ -2,10 +2,7 @@ package com.tjfaccipieri.acnh_companion.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +21,8 @@ public class Fossils {
   private String image;
   private Long sell_price;
   private String fossil_group;
+  
+  @Column(name = "description", columnDefinition = "text")
   private String description;
   private Long hha_base_points;
   private String color1;

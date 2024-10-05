@@ -1,4 +1,4 @@
-package com.tjfaccipieri.acnh_companion.model.DTO;
+package com.tjfaccipieri.acnh_companion.model.DTO.UsersDTO;
 
 import lombok.Getter;
 import lombok.Setter;

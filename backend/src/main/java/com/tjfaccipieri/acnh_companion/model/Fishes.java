@@ -1,10 +1,7 @@
 package com.tjfaccipieri.acnh_companion.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,6 +23,8 @@ public class Fishes {
   private String color1;
   private String color2;
   private String critterpedia_image;
+  
+  @Column(name = "description", columnDefinition = "text")
   private String description;
   private String furniture_image;
   private Long hha_base_points;

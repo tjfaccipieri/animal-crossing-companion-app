@@ -2,8 +2,6 @@ package com.tjfaccipieri.acnh_companion.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +22,8 @@ public class Bugs {
   private String color1;
   private String color2;
   private String critterpedia_image;
+  
+  @Column(name = "description", columnDefinition = "text")
   private String description;
   private Long flick_sell_price;
   private String furniture_image;

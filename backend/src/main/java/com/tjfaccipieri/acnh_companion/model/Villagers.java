@@ -1,10 +1,15 @@
 package com.tjfaccipieri.acnh_companion.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_villagers")
@@ -30,4 +35,8 @@ public class Villagers {
   private String color2;
   private String name_color;
   private String bubble_color;
+  
+  @ManyToMany(mappedBy = "villagersOnIsland")
+  @JsonIgnoreProperties("villagersOnIsland")
+  private Set<Islands> island = new HashSet<>();
 }
