@@ -171,6 +171,10 @@ public class UsersService {
   }
 
   public Optional<UserLogin> authenticateUser(Optional<UserLogin> userLogin) {
+    if (userLogin.isEmpty()) {
+      return Optional.empty();
+    }
+    
     var credentials = new UsernamePasswordAuthenticationToken(userLogin.get().getUsername(), userLogin.get().getPassword());
 
     Authentication authentication = authenticationManager.authenticate(credentials);

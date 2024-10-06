@@ -46,7 +46,7 @@ public class JwtService {
   
   public Boolean validateToken(String token, UserDetails userDetails) {
     final String username = extractUsername(token);
-    return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    return (username.equals(userDetails.getUsername()));
   }
   
   // Todo: Refatorar isso para fazer com Refresh Token de 1 semana, com token de 1 hora
@@ -55,7 +55,6 @@ public class JwtService {
         .setClaims(claims)
         .setSubject(userName)
         .setIssuedAt(new Date(System.currentTimeMillis()))
-        // .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
         .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
   }
   

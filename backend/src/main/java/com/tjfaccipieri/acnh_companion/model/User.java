@@ -33,17 +33,6 @@ public class User {
   @JoinColumn(name = "island_id", referencedColumnName = "id")
   private Islands island;
 
-  public User(Long id, String username, String password, String email, Islands island) {
-    this.id = id;
-    this.username = username;
-    this.password = password;
-    this.email = email;
-    this.island = island;
-  }
-
-  public User() {
-  }
-
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
       name = "user_donated_bugs",
@@ -88,6 +77,21 @@ public class User {
   )
   @JsonIgnore
   private Set<Arts> donatedArts = new HashSet<>();
+  
+  public User(Long id, String username, String password, String email, Islands island, Set<Bugs> donatedBugs, Set<Fishes> donatedFishes, Set<SeaCreatures> donatedSeaCreatures, Set<Fossils> donatedFossils, Set<Arts> donatedArts) {
+    this.id = id;
+    this.username = username;
+    this.password = password;
+    this.email = email;
+    this.island = island;
+    this.donatedBugs = donatedBugs;
+    this.donatedFishes = donatedFishes;
+    this.donatedSeaCreatures = donatedSeaCreatures;
+    this.donatedFossils = donatedFossils;
+    this.donatedArts = donatedArts;
+  }
+  
+  public User() {}
   
   public void donateBug(Bugs bug) {
     donatedBugs.add(bug);

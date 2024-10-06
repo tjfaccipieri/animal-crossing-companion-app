@@ -40,6 +40,7 @@ public class UserController {
 
   @PostMapping("/login")
   public ResponseEntity<UserLogin> authenticateUser(@RequestBody Optional<UserLogin> userLogin) {
+    
     return usersService.authenticateUser(userLogin)
             .map(response -> ResponseEntity.status(HttpStatus.OK).body(response))
             .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());

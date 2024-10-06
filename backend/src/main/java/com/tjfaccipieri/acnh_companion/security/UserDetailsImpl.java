@@ -1,7 +1,7 @@
 package com.tjfaccipieri.acnh_companion.security;
 
+import com.tjfaccipieri.acnh_companion.model.User;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +22,6 @@ public class UserDetailsImpl implements UserDetails {
     this.password = user.getPassword();
   }
 
-  public UserDetailsImpl(com.tjfaccipieri.acnh_companion.model.User user) {}
-
   public UserDetailsImpl() {}
   
   @Override
@@ -33,6 +31,7 @@ public class UserDetailsImpl implements UserDetails {
   
   @Override
   public String getPassword() {
+    System.out.println(password);
     return password;
   }
   
