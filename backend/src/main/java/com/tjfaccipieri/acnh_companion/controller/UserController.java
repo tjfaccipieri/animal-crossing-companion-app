@@ -1,15 +1,20 @@
 package com.tjfaccipieri.acnh_companion.controller;
 
 import com.tjfaccipieri.acnh_companion.model.DTO.UsersDTO.UserDonation;
+import com.tjfaccipieri.acnh_companion.model.Islands;
 import com.tjfaccipieri.acnh_companion.model.User;
 import com.tjfaccipieri.acnh_companion.repository.BugsRepository;
+import com.tjfaccipieri.acnh_companion.repository.IslandsRepository;
 import com.tjfaccipieri.acnh_companion.repository.UserRepository;
 import com.tjfaccipieri.acnh_companion.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -22,9 +27,24 @@ public class UserController {
   @Autowired
   private UsersService usersService;
   
+  @Autowired
+  private IslandsRepository islandsRepository;
+  
   @PostMapping
   public ResponseEntity<User> createUser(@RequestBody User user) {
     return ResponseEntity.ok(userRepository.save(user));
+  }
+  
+  @PutMapping
+  public ResponseEntity<User> updateUser(@RequestBody User user) {
+    Optional<Islands> existingIsland = islandsRepository.findById(user.getIsland().getId());
+    
+    if (existingIsland.isPresent()) {
+      user.setIsland(existingIsland.get());
+      return ResponseEntity.ok(userRepository.save(user));
+    }
+    
+    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Island don't exist");
   }
   
   @GetMapping("/{id}")

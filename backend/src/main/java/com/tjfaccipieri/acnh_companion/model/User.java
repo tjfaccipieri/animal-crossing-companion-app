@@ -30,6 +30,7 @@ public class User {
 
   @OneToOne(cascade = CascadeType.ALL)
   @JsonIgnoreProperties("user")
+  @JoinColumn(name = "island_id", referencedColumnName = "id")
   private Islands island;
   
   @ManyToMany(fetch = FetchType.LAZY)
