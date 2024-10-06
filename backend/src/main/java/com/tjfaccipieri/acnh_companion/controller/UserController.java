@@ -1,6 +1,7 @@
 package com.tjfaccipieri.acnh_companion.controller;
 
 import com.tjfaccipieri.acnh_companion.model.DTO.UsersDTO.UserDonation;
+import com.tjfaccipieri.acnh_companion.model.DTO.UsersDTO.UserLogin;
 import com.tjfaccipieri.acnh_companion.model.Islands;
 import com.tjfaccipieri.acnh_companion.model.User;
 import com.tjfaccipieri.acnh_companion.repository.BugsRepository;
@@ -32,7 +33,16 @@ public class UserController {
   
   @PostMapping
   public ResponseEntity<User> createUser(@RequestBody User user) {
-    return ResponseEntity.ok(userRepository.save(user));
+    return usersService.createNewUser(user)
+            .map(response -> ResponseEntity.status(HttpStatus.CREATED).body(response))
+            .orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
+  }
+
+  @PostMapping("/login")
+  public ResponseEntity<UserLogin> authenticateUser(@RequestBody Optional<UserLogin> userLogin) {
+    return usersService.authenticateUser(userLogin)
+            .map(response -> ResponseEntity.status(HttpStatus.OK).body(response))
+            .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
   }
   
   @PutMapping

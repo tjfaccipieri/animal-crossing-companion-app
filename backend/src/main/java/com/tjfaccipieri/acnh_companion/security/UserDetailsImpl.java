@@ -21,9 +21,10 @@ public class UserDetailsImpl implements UserDetails {
     this.userName = user.getUsername();
     this.password = user.getPassword();
   }
-  
-  public UserDetailsImpl(com.tjfaccipieri.acnh_companion.model.User user) {
-  }
+
+  public UserDetailsImpl(com.tjfaccipieri.acnh_companion.model.User user) {}
+
+  public UserDetailsImpl() {}
   
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

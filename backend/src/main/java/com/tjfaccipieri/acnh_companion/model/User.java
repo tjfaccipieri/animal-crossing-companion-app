@@ -32,7 +32,18 @@ public class User {
   @JsonIgnoreProperties("user")
   @JoinColumn(name = "island_id", referencedColumnName = "id")
   private Islands island;
-  
+
+  public User(Long id, String username, String password, String email, Islands island) {
+    this.id = id;
+    this.username = username;
+    this.password = password;
+    this.email = email;
+    this.island = island;
+  }
+
+  public User() {
+  }
+
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
       name = "user_donated_bugs",

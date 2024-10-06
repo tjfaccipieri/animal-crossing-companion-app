@@ -2,11 +2,19 @@ package com.tjfaccipieri.acnh_companion.service;
 
 import com.tjfaccipieri.acnh_companion.model.*;
 import com.tjfaccipieri.acnh_companion.model.DTO.UsersDTO.UserDonation;
+import com.tjfaccipieri.acnh_companion.model.DTO.UsersDTO.UserLogin;
 import com.tjfaccipieri.acnh_companion.repository.*;
+import com.tjfaccipieri.acnh_companion.security.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UsersService {
@@ -17,6 +25,12 @@ public class UsersService {
   @Autowired private SeaCreaturesRepository seaCreaturesRepository;
   @Autowired private FossilsRepository fossilsRepository;
   @Autowired private ArtsRepository artsRepository;
+
+  @Autowired
+  private JwtService jwtService;
+
+  @Autowired
+  private AuthenticationManager authenticationManager;
 
   public ResponseEntity<Object> donation(UserDonation donation) {
     User user = userRepository.findById(donation.getUserId()).orElse(null);
@@ -146,6 +160,43 @@ public class UsersService {
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
   
-  
+  public Optional<User> createNewUser(User user) {
+    if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+      return Optional.empty();
+    }
+
+    user.setPassword(hashPassword(user.getPassword()));
+
+    return Optional.of(userRepository.save(user));
+  }
+
+  public Optional<UserLogin> authenticateUser(Optional<UserLogin> userLogin) {
+    var credentials = new UsernamePasswordAuthenticationToken(userLogin.get().getUsername(), userLogin.get().getPassword());
+
+    Authentication authentication = authenticationManager.authenticate(credentials);
+
+    if (authentication.isAuthenticated()) {
+      Optional<User> user = userRepository.findByUsername(userLogin.get().getUsername());
+
+      if (user.isPresent()) {
+        userLogin.get().setId(user.get().getId());
+        userLogin.get().setUsername(user.get().getUsername());
+        userLogin.get().setPassword("");
+        userLogin.get().setToken(generateToken(userLogin.get().getUsername()));
+
+        return userLogin;
+      }
+    }
+      return Optional.empty();
+  }
+
+  private String hashPassword(String password) {
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    return encoder.encode(password);
+  }
+
+  private String generateToken(String user) {
+    return "Bearer " + jwtService.generateToken(user);
+  }
   
 }
