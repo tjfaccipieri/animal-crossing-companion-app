@@ -10,15 +10,17 @@ import { FossilsPage } from './pages/fossils';
 import { Home } from './pages/home';
 import { SeaCreaturesPage } from './pages/sea-creatures';
 import { Villagers } from './pages/villagers';
+import { Login } from './pages/login';
 
 export function App() {
   return (
-    <UserProvider>
+    // <UserProvider>
       <BrowserRouter>
         <div className="grid grid-rows-[auto_1fr_auto] min-h-screen">
           <Navbar />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/bugs" element={<BugsPage />} />
             <Route path="/fishes" element={<FishesPage />} />
             <Route path="/sea-creatures" element={<SeaCreaturesPage />} />
@@ -29,6 +31,6 @@ export function App() {
           <Footer />
         </div>
       </BrowserRouter>
-    </UserProvider>
+    // </UserProvider>
   );
 }
