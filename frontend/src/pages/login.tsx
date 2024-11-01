@@ -1,4 +1,10 @@
+import { useState } from "react"
+import type { UserLogin } from "../models/UserLogin"
+
 export function Login() {
+
+  const [user, setUser] = useState({} as UserLogin)
+
   return(
     <div className="container max-w-xs mx-auto flex flex-col justify-center">
       <h1 className="text-3xl text-center font-custom text-amber-950 font-bold mb-8">

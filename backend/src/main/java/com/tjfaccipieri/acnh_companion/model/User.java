@@ -195,4 +195,5 @@ public class User {
         .map(Arts::getId)
         .collect(Collectors.toSet());
   }
+  
 }
