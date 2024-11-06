@@ -31,7 +31,7 @@ public class UserController {
   @Autowired
   private IslandsRepository islandsRepository;
   
-  @PostMapping
+  @PostMapping("/register")
   public ResponseEntity<User> createUser(@RequestBody User user) {
     return usersService.createNewUser(user)
             .map(response -> ResponseEntity.status(HttpStatus.CREATED).body(response))
