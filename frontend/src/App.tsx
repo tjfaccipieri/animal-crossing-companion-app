@@ -11,6 +11,7 @@ import { Home } from './pages/home';
 import { SeaCreaturesPage } from './pages/sea-creatures';
 import { Villagers } from './pages/villagers';
 import { Login } from './pages/login';
+import { Register } from './pages/register';
 
 export function App() {
   return (
@@ -20,6 +21,7 @@ export function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/home" element={<Home />} />
             <Route path="/bugs" element={<BugsPage />} />
             <Route path="/fishes" element={<FishesPage />} />
