@@ -17,7 +17,7 @@ export function FishCard({ item }: FishItemProps) {
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
 
-  const {data: user} = useContext(UserContext)
+  const {user} = useContext(UserContext)
 
   return (
     <div

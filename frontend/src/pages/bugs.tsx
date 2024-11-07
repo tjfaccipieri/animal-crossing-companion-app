@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { type ChangeEvent, useContext, useMemo, useState } from 'react';
 import { BugCard } from '../components/bugs/bug-card';
 import { EmptyList } from '../components/ui/empty-list';
@@ -17,15 +17,16 @@ export function BugsPage() {
       return data;
     },
     staleTime: 1000 * 60 * 60 * 24, // 1 dia completo, em milissegundos
-
   });
 
-  const {data: user} = useContext(UserContext)
+  const {user} = useContext(UserContext)
+
+  console.log(user);
 
   const [orderBy, setOrderBy] = useState<string>('asc');
   const [name, setName] = useState<string>('');
 
-  const count = user.donatedBugsIds.length
+  const count = user?.donatedBugsIds.length
   const percentage = (count * 100) / data?.length!;
 
   const useSortedAndFilteredData = (data: Bug[], orderBy: string) => {

@@ -19,12 +19,12 @@ export function FishesPage() {
     staleTime: 1000 * 60 * 60 * 24, // 1 dia completo, em milissegundos
   });
 
-  const {data: user} = useContext(UserContext)
+  const {user} = useContext(UserContext)
 
   const [orderBy, setOrderBy] = useState<string>('asc');
   const [name, setName] = useState<string>('');
 
-  const count = user.donatedFishesIds.length
+  const count = user?.donatedFishesIds.length
   const percentage = (count * 100) / data?.length!;
 
   const useSortedAndFilteredData = (data: Fish[], orderBy: string) => {

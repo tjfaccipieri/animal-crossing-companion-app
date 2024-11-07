@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { type ChangeEvent, useContext, useMemo, useState } from 'react';
 import { SeaCreatureCard } from '../components/seaCreatures/seaCreature-card';
 import { EmptyList } from '../components/ui/empty-list';
@@ -19,12 +19,15 @@ export function SeaCreaturesPage() {
     staleTime: 1000 * 60 * 60 * 24, // 1 dia completo, em milissegundos
   });
 
-  const {data: user} = useContext(UserContext)
+  const {user} = useContext(UserContext)
+
+  const queryClient = useQueryClient();
+  queryClient.invalidateQueries({ queryKey: ['user'] });
 
   const [orderBy, setOrderBy] = useState<string>('asc');
   const [name, setName] = useState<string>('');
 
-  const count = user.donatedSeaCreaturesIds.length
+  const count = user?.donatedSeaCreaturesIds.length
   const percentage = (count * 100) / data?.length!;
 
   const useSortedAndFilteredData = (data: SeaCreature[], orderBy: string) => {

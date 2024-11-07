@@ -15,7 +15,7 @@ import { Register } from './pages/register';
 
 export function App() {
   return (
-    // <UserProvider>
+    <UserProvider>
       <BrowserRouter>
         <div className="grid grid-rows-[auto_1fr_auto] min-h-screen">
           <Navbar />
@@ -33,6 +33,6 @@ export function App() {
           <Footer />
         </div>
       </BrowserRouter>
-    // </UserProvider>
+    </UserProvider>
   );
 }

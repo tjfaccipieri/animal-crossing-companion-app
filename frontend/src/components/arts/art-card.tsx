@@ -17,7 +17,7 @@ export function ArtCard({item}: ArtItemProps) {
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
 
-  const {data: user} = useContext(UserContext)
+  const {user} = useContext(UserContext)
 
   return (
     <div

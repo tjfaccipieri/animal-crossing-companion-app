@@ -1,10 +1,40 @@
-import { useContext } from 'react';
 import { ProgressDonateHome } from '../components/ui/progress-donate-home';
 import { TurnipPerDay } from '../components/ui/turnip-per-day';
-import { UserContext } from '../context/UserContext';
+import { useQuery } from '@tanstack/react-query';
+import type { User } from '../models/User';
+import construction from '/gyroid.webp';
 
 export function Home() {
-  const { data: user } = useContext(UserContext);
+  const { data, isLoading } = useQuery<User>({
+    queryKey: ['home'],
+    queryFn: async () => {
+      const resp = await fetch(`http://localhost:8080/users/${localStorage.getItem('userId')}`, {
+        headers: {
+          Authorization: `${localStorage.getItem('token')}`,
+        },
+      });
+      const data = resp.json();
+      return data;
+    },
+    staleTime: 1000 * 60 * 60 * 24, // 1 dia completo, em milissegundos
+  });
+
+  if (!data) {
+    return null
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center gap-8 mt-8">
+        <p className="font-bold text-center text-2xl text-amber-950">
+          This page is under construction and awaiting donations from our
+          residents. Please use the navbar so our Dodos can take you somewhere
+          more useful.
+        </p>
+        <img src={construction} alt="" />
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto my-4">
@@ -33,13 +63,13 @@ export function Home() {
           <TurnipPerDay day={'sat'} />
         </div>
         <div className="col-span-2">
-          <h2>Total donations for {user.username}</h2>
+          <h2>Total donations for {data.username}</h2>
           <div className="grid gap-2">
-            <ProgressDonateHome title="Bugs" count={user.totalDonatedBugs} total={80} />
-            <ProgressDonateHome title="Fishes" count={user.totalDonatedFishes} total={80} />
-            <ProgressDonateHome title="Sea Creatures" count={user.totalDonatedSeaCreatures} total={40} />
-            <ProgressDonateHome title="Fossils" count={user.totalDonatedFossil} total={73} />
-            <ProgressDonateHome title="Arts" count={user.totalDonatedArt} total={43} />
+            <ProgressDonateHome title="Bugs" count={data.totalDonatedBugs} total={80} />
+            <ProgressDonateHome title="Fishes" count={data.totalDonatedFishes} total={80} />
+            <ProgressDonateHome title="Sea Creatures" count={data.totalDonatedSeaCreatures} total={40} />
+            <ProgressDonateHome title="Fossils" count={data.totalDonatedFossil} total={73} />
+            <ProgressDonateHome title="Arts" count={data.totalDonatedArt} total={43} />
           </div>
         </div>
       </div>

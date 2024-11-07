@@ -20,12 +20,12 @@ export function ArtsPage() {
     staleTime: 1000 * 60 * 60 * 24, // 1 dia completo, em milissegundos
   });
 
-  const {data: user} = useContext(UserContext)
+  const {user} = useContext(UserContext)
 
   const [orderBy, setOrderBy] = useState<string>('asc');
   const [name, setName] = useState<string>('');
 
-  const count = user.donatedArtsIds.length
+  const count = user?.donatedArtsIds.length
   const percentage = (count * 100) / data?.length!;
 
   const useSortedAndFilteredData = (data: Art[], orderBy: string) => {

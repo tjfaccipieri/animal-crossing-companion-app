@@ -10,7 +10,7 @@ interface SeaCreaturesProps {
 }
 
 export function SeaCreaturesDetails({ seaCreature }: SeaCreaturesProps) {
-  const {data: user} = useContext(UserContext)
+  const {user} = useContext(UserContext)
 
   return (
     <div className="bg-amber-900 text-amber-100 flex flex-col gap-2 font-serif">
