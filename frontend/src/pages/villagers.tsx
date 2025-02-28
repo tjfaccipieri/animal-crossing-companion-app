@@ -52,6 +52,7 @@ export function Villagers() {
                     style={{ borderColor: villager.nameColor }}
                     className="rounded-lg w-32 border-[3px]"
                   />
+                  
                   <div className="">
                     <p className="">
                       Name:{' '}

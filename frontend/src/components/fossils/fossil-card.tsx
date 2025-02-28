@@ -17,7 +17,7 @@ export function FossilCard({ item }: FossilItemProps) {
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
 
-  const {user} = useContext(UserContext)
+  // const {user} = useContext(UserContext)
 
   return (
     <div
@@ -31,7 +31,7 @@ export function FossilCard({ item }: FossilItemProps) {
             alt="Bug icon in game"
             className="h-16 w-16 bg-amber-100 rounded-lg p-1"
           />
-          {user.donatedFossilsIds.includes(item.id) && <CheckedDonate />}
+          {/* {user.donatedFossilsIds.includes(item.id) && <CheckedDonate />} */}
         </div>
         <h3 className="capitalize font-medium text-lg flex-1">{item.name}</h3>
         <button

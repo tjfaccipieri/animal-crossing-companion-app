@@ -18,7 +18,7 @@ public class VillagersController {
   private VillagersRepository repository;
   
   @GetMapping
-  public ResponseEntity<List<Villagers>> getAllBugs() {
+  public ResponseEntity<List<Villagers>> getAllVillagers() {
     return ResponseEntity.ok(repository.findAll());
   }
   

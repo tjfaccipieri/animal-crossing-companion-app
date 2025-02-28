@@ -14,7 +14,7 @@ interface BugProps {
 
 export function BugsDetails({ bug }: BugProps) {
 
-  const {user} = useContext(UserContext)
+  // const {user} = useContext(UserContext)
 
   return (
     <div className="bg-amber-900 text-amber-100 flex flex-col gap-2 font-serif">
@@ -81,11 +81,12 @@ export function BugsDetails({ bug }: BugProps) {
           <img
             src={coruja}
             alt=""
-            className={`h-10 ${user.donatedBugsIds.includes(bug.id) ? '' : 'opacity-35'}`}
+            className={`h-10 `}
+            // ${user.donatedBugsIds.includes(bug.id) ? '' : 'opacity-35'}
           />
           <figcaption>Donated?</figcaption>
         </figure>
-        <SwitchDonate donated={user.donatedBugsIds.includes(bug.id)} id={bug.id} route={'bugs'} type='bug' />
+        {/* <SwitchDonate donated={user.donatedBugsIds.includes(bug.id)} id={bug.id} route={'bugs'} type='bug' /> */}
       </div>
     </div>
   );
